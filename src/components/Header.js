@@ -1,3 +1,5 @@
+import { useCallback, useRef } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
   MenuIcon,
@@ -5,10 +7,46 @@ import {
   ShoppingCartIcon,
   ShoppingIcon,
 } from "@heroicons/react/outline";
+import LiveSearch from "./LiveSearch";
 
-function Header() {
+function Header({ products }) {
+  console.log("App Render Starts");
+  const [search, setSearch] = useState("");
+  const [records, setRecord] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]);
+
+  const water = search;
+
+  const loadProductDetail = () => {
+    setRecord(products);
+    // setRecord((products) => [...products, products]);
+    console.log("setting products into SetRecord");
+    console.log(products);
+  };
+
+  useEffect(() => {
+    console.log("use Effect started to set Product into Records");
+    loadProductDetail();
+  }, []);
+
+  useEffect(() => {
+    if (search.length > 0) {
+      console.log("useEffect for search is");
+      console.log(search);
+      setFilterProducts([]);
+      setFilterProducts(
+        products.filter((product) => {
+          return product.title.toLowerCase().includes(search.toLowerCase());
+        })
+      );
+    } else {
+      setFilterProducts([]);
+    }
+  }, [search]);
+
   return (
     <header>
+      {console.log("HTML started")}
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
         <div className="mt-2 flex item-center flex-grow sm:flex-grow-0">
           <Image
@@ -24,6 +62,10 @@ function Header() {
           <input
             className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none"
             type="text"
+            id="search"
+            placeholder="Enter What You're Looking For"
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
           />
           <SearchIcon className="h-12 p-4" />
         </div>
@@ -48,6 +90,18 @@ function Header() {
             </p>
           </div>
         </div>
+      </div>
+      <div>{search}</div>
+      <div>
+        {/* {products.map((product) => (
+          <p key={product.id}>{product.title}</p>
+        ))} */}
+
+        {filterProducts.map((product, index) => (
+          <p className="text-xs text-gray-500" key={index}>
+            {product.title}
+          </p>
+        ))}
       </div>
       <div className="flex items-center space-x-3 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
         <p className="link flex items-center">
