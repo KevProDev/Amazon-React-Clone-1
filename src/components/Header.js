@@ -13,48 +13,49 @@ import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
 import { selectItems } from "../slices/basketSlice";
 
-function Header() {
-  const [session] = useSession();
+function Header({ products }) {
+  // const [session] = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
 
-  // console.log("App Render Starts");
-  // const [search, setSearch] = useState("");
-  // const [records, setRecord] = useState([]);
-  // const [filterProducts, setFilterProducts] = useState([]);
+  // const searchWrapper = document.querySelector('autocom-box')
+
+  console.log("My Function Starts");
+  const [search, setSearch] = useState("");
+  const [records, setRecord] = useState([]);
+  const [filterProducts, setFilterProducts] = useState([]);
 
   // const water = search;
 
-  // const loadProductDetail = () => {
-  //   setRecord(products);
-  //   // setRecord((products) => [...products, products]);
-  //   console.log("setting products into SetRecord");
-  //   console.log(products);
-  // };
+  useEffect(() => {
+    setRecord(products);
+    // setRecord((products) => [...products]);
+    console.log("setting products into SetRecord");
+  }, []);
 
-  // useEffect(() => {
-  //   console.log("use Effect started to set Product into Records");
-  //   loadProductDetail();
-  // }, []);
+  useEffect(() => {
+    console.log("use 2nd Effect");
+    console.log(records);
+  }, [records]);
 
-  // useEffect(() => {
-  //   if (search.length > 0) {
-  //     console.log("useEffect for search is");
-  //     console.log(search);
-  //     setFilterProducts([]);
-  //     setFilterProducts(
-  //       products.filter((product) => {
-  //         return product.title.toLowerCase().includes(search.toLowerCase());
-  //       })
-  //     );
-  //   } else {
-  //     setFilterProducts([]);
-  //   }
-  // }, [search]);
+  useEffect(() => {
+    if (search.length > 0) {
+      console.log("useEffect for search started");
+      console.log(search);
+      setFilterProducts([]);
+      setFilterProducts(
+        products.filter((product) => {
+          return product.title.toLowerCase().includes(search.toLowerCase());
+        })
+      );
+    } else {
+      setFilterProducts([]);
+    }
+  }, [search]);
 
   return (
     <header>
-      {/* {console.log("HTML started")} */}
+      {console.log("HTML started")}
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
         <div className="mt-2 flex item-center flex-grow sm:flex-grow-0">
           <Image
@@ -72,16 +73,29 @@ function Header() {
             className="p-2 h-full w-6 flex-grow flex-shrink rounded-l-md focus:outline-none"
             type="text"
             id="search"
-            // onChange={(e) => setSearch(e.target.value)}
-            // value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            value={search}
           />
           <SearchIcon className="h-12 p-4" />
+          <div className="autocom-box b1 bg-white text-black z-10 p-1 list-none px-2 rounded-b-md">
+            {filterProducts.map((product, index) => (
+              <li className="p-1" key={index}>
+                {product.title}
+              </li>
+            ))}
+
+            {/* <li className="p-1">Item 1</li>
+            <li className="p-1">Item 2</li>
+            <li className="p-1">Item 3</li>
+            <li className="p-1">Item 4</li>
+            <li className="p-1">Item 5</li> */}
+          </div>
         </div>
 
         {/* RIGHT  */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
-          <div onClick={!session ? signIn : signOut} className="link">
-            <p>{session ? `Hello, ${session.user.name}` : "Sign In"}</p>
+          <div className="link">
+            <p>{/* {session ? `Hello, ${session.user.name}` : "Sign In"} */}</p>
             <p className="font-extrabold md:text-sm">Account & Lists</p>
           </div>
           <div className="link">
@@ -125,6 +139,7 @@ function Header() {
         <p className="link hidden lg:inline-flex">Shopper Toolkit</p>
         <p className="link hidden lg:inline-flex">Health & Personal Care</p>
       </div>
+      {console.log("My Function Finsh")}
     </header>
   );
 }
