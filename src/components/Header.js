@@ -25,8 +25,6 @@ function Header({ products }) {
   const [records, setRecord] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
 
-  // const water = search;
-
   useEffect(() => {
     setRecord(products);
     // setRecord((products) => [...products]);
@@ -77,7 +75,7 @@ function Header({ products }) {
             value={search}
           />
           <SearchIcon className="h-12 p-4" />
-          <div className="autocom-box b1 bg-white text-black z-10 p-1 list-none px-2 rounded-b-md">
+          <div className="autocom-box b1 bg-white text-black z-10 list-none px-2 rounded-b-md">
             {filterProducts.map((product, index) => (
               <li className="p-1" key={index}>
                 {product.title}
