@@ -22,19 +22,12 @@ function Productpage() {
       <main className="lg:flex max-w-screen-2xl mx-auto">
         <div className="">Left Col</div>
 
-        <div className="">
+        <div className="flex flex-grow ">
           <h1>{item.title}</h1>
-          <h1>{item.price}</h1>
-          <h1>{item.description}</h1>
-          <span>Department</span>
-          <h1>
-            Samsung CF390 Series 27 inch FHD 1920x1080 Curved Desktop Monitor
-            for Business, HDMI, VGA, VESA mountable, 3-Year Warranty, TAA
-            (C27F390FHN), Black
-          </h1>
-          <p>Rating</p>
-          <p>Company</p>
-          <p>In-Stock</p>
+          <p>{item.rating}</p>
+          <p>{item.isPrime}</p>
+          <p>{item.price}</p>
+          <p>{item.description}</p>
         </div>
 
         <div className="">Right Col</div>
