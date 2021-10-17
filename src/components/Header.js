@@ -1,5 +1,6 @@
 import { useCallback, useRef } from "react";
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import {
   MenuIcon,
@@ -7,7 +8,6 @@ import {
   ShoppingCartIcon,
   ShoppingIcon,
 } from "@heroicons/react/outline";
-import LiveSearch from "./LiveSearch";
 import { signIn, signOut, useSession } from "next-auth/client";
 import { useRouter } from "next/router";
 import { useSelector } from "react-redux";
@@ -77,16 +77,12 @@ function Header({ products }) {
           <SearchIcon className="h-12 p-4" />
           <div className="autocom-box b1 bg-white text-black z-10 list-none px-2 rounded-b-md">
             {filterProducts.map((product, index) => (
-              <li className="p-1" key={index}>
-                {product.title}
-              </li>
+              <Link key={index} href="/[amazonProduct]" as={`/${product.id}`}>
+                <li className="p-1" key={index}>
+                  {product.title}
+                </li>
+              </Link>
             ))}
-
-            {/* <li className="p-1">Item 1</li>
-            <li className="p-1">Item 2</li>
-            <li className="p-1">Item 3</li>
-            <li className="p-1">Item 4</li>
-            <li className="p-1">Item 5</li> */}
           </div>
         </div>
 
@@ -114,14 +110,6 @@ function Header({ products }) {
           </div>
         </div>
       </div>
-      {/* <div>{search}</div>
-      <div>
-        {filterProducts.map((product, index) => (
-          <p className="text-xs text-gray-500" key={index}>
-            {product.title}
-          </p>
-        ))}
-      </div> */}
       <div className="flex items-center space-x-3 p-2 pl-6 bg-amazon_blue-light text-white text-sm">
         <p className="link flex items-center">
           <MenuIcon className="h-6 mr-1" />
