@@ -12,7 +12,7 @@ export default function amazonProduct({ amazonProduct }) {
       <Header />
       <div className="grid px-8 py-12 sm:grid-rows-3 mt-4 md:grid-cols-5 max-w-screen-xl m-auto space-y-3">
         {/* Image Left */}
-        <div className="col-span-2 flex items-center justify-center sm:justify-end">
+        <div className="col-span-2 flex items-center justify-center md:justify-end">
           <Image
             src={amazonProduct.image}
             height={300}
