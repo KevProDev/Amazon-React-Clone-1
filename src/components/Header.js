@@ -14,7 +14,7 @@ import { useSelector } from "react-redux";
 import { selectItems } from "../slices/basketSlice";
 
 function Header({ products }) {
-  // const [session] = useSession();
+  const [session] = useSession();
   const router = useRouter();
   const items = useSelector(selectItems);
 
@@ -33,7 +33,7 @@ function Header({ products }) {
 
   useEffect(() => {
     console.log("use 2nd Effect");
-    console.log(records);
+    // console.log(records);
   }, [records]);
 
   useEffect(() => {
@@ -89,7 +89,18 @@ function Header({ products }) {
         {/* RIGHT  */}
         <div className="text-white flex items-center text-xs space-x-6 mx-6 whitespace-nowrap">
           <div className="link">
-            <p>{/* {session ? `Hello, ${session.user.name}` : "Sign In"} */}</p>
+            {!session && (
+              <>
+                Not signed in <br />
+                <button onClick={() => signIn()}>Sign in</button>
+              </>
+            )}
+            {session && (
+              <>
+                {session.user.email} <br />
+                <button onClick={() => signOut()}>Sign out</button>
+              </>
+            )}
             <p className="font-extrabold md:text-sm">Account & Lists</p>
           </div>
           <div className="link">

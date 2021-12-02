@@ -74,17 +74,21 @@ function Product({ id, title, price, description, category, image }) {
         {category}
       </p>
 
-      <Link key={id} href="/[amazonProduct]" as={`/${id}`}>
-        <Image
-          src={image}
-          height={200}
-          width={200}
-          objectFit="contain"
-          className="cursor-pointer"
-        />
+      <Link href="/[amazonProduct]" as={`/${id}`}>
+        <a>
+          <Image
+            src={image}
+            height={200}
+            width={200}
+            objectFit="contain"
+            className="cursor-pointer"
+          />
+        </a>
       </Link>
-      <Link key={id} href="/[amazonProduct]" as={`/${id}`}>
-        <h4 className="my-3 cursor-pointer">{title}</h4>
+      <Link href="/[amazonProduct]" as={`/${id}`}>
+        <a>
+          <h4 className="my-3 cursor-pointer">{title}</h4>
+        </a>
       </Link>
 
       <div className="flex">
