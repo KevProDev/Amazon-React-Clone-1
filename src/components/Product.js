@@ -58,8 +58,6 @@ function Product({ id, title, price, description, category, image }) {
       rating,
       hasPrime,
     };
-
-    console.log(product);
     dispatch(addToSinglePage(product));
   };
 

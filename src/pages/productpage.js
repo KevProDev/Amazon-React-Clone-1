@@ -12,10 +12,6 @@ function Productpage() {
 
   const item = useSelector(selectItem);
 
-  console.log("product page loaded and started");
-  console.log(item);
-  console.log(item.id);
-
   return (
     <div>
       <Header />

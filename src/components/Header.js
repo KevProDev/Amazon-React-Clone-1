@@ -19,8 +19,6 @@ function Header({ products }) {
   const items = useSelector(selectItems);
 
   // const searchWrapper = document.querySelector('autocom-box')
-
-  console.log("My Function Starts");
   const [search, setSearch] = useState("");
   const [records, setRecord] = useState([]);
   const [filterProducts, setFilterProducts] = useState([]);
@@ -28,18 +26,12 @@ function Header({ products }) {
   useEffect(() => {
     setRecord(products);
     // setRecord((products) => [...products]);
-    console.log("setting products into SetRecord");
   }, []);
 
-  useEffect(() => {
-    console.log("use 2nd Effect");
-    // console.log(records);
-  }, [records]);
+  useEffect(() => {}, [records]);
 
   useEffect(() => {
     if (search.length > 0) {
-      console.log("useEffect for search started");
-      console.log(search);
       setFilterProducts([]);
       setFilterProducts(
         products.filter((product) => {
@@ -53,7 +45,6 @@ function Header({ products }) {
 
   return (
     <header>
-      {console.log("HTML started")}
       <div className="flex items-center bg-amazon_blue p-1 flex-grow py-2">
         <div className="mt-2 flex item-center flex-grow sm:flex-grow-0">
           <Image
@@ -136,7 +127,6 @@ function Header({ products }) {
         <p className="link hidden lg:inline-flex">Shopper Toolkit</p>
         <p className="link hidden lg:inline-flex">Health & Personal Care</p>
       </div>
-      {console.log("My Function Finsh")}
     </header>
   );
 }
